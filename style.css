@@ -21,18 +21,38 @@ h1 {
 }
 
 .container {
-  height: 680px;
-  width: 680px;
+  height: 600px;
+  width: 492px;
   background-color: antiquewhite;
   display: flex;
   flex-direction: column;
 }
   
-.display,
-.buttons {
-  flex: auto;
+.display {
+  flex: 3 3 auto;
+  display: flex;
 }
   
 .buttons {
+  flex: 2 2 auto;
   background-color: lightsteelblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.row-1,
+.row-2,
+.row-3,
+.row-4,
+.row-5 {
+  display: flex;
+  gap: 15px;
+}
+
+.calc-button {
+  height: 72px;
+  width: 104px;
+  flex: auto;
 }
