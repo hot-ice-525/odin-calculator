@@ -6,7 +6,70 @@
   box-sizing: border-box;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+}
+
 h1 {
   color: red;
   text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.container {
+  background-color: antiquewhite;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+  
+.display {
+  flex: auto;
+  height: 100px;
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.display > .previous,
+.display > .answer {
+  margin-left: auto;
+  margin-right: 10px;
+  margin-bottom: 7px;
+}
+
+.display > .answer {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+  
+.buttons {
+  flex: auto;
+  background-color: lightsteelblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.row-1,
+.row-2,
+.row-3,
+.row-4,
+.row-5 {
+  display: flex;
+  
+}
+
+.calc-button {
+  height: 72px;
+  width: 104px;
+  flex: auto;
 }
