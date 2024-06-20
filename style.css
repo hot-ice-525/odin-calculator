@@ -6,7 +6,33 @@
   box-sizing: border-box;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+}
+
 h1 {
   color: red;
   text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.container {
+  height: 680px;
+  width: 680px;
+  background-color: antiquewhite;
+  display: flex;
+  flex-direction: column;
+}
+  
+.display,
+.buttons {
+  flex: auto;
+}
+  
+.buttons {
+  background-color: lightsteelblue;
 }
