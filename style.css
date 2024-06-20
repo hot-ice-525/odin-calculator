@@ -11,10 +11,11 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center; 
+  background-color: lightslategray;
 }
 
 h1 {
-  color: red;
+  color:aquamarine;
   text-align: center;
   margin-top: 30px;
   margin-bottom: 30px;
@@ -55,8 +56,6 @@ h1 {
   background-color: lightsteelblue;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
 }
 
 .row-1,
