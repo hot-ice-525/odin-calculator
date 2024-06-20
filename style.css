@@ -16,25 +16,42 @@ body {
 h1 {
   color: red;
   text-align: center;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .container {
-  height: 600px;
-  width: 492px;
   background-color: antiquewhite;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
 }
   
 .display {
-  flex: 3 3 auto;
+  flex: auto;
+  height: 100px;
   display: flex;
+  text-align: left;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.display > .previous,
+.display > .answer {
+  margin-left: auto;
+  margin-right: 10px;
+  margin-bottom: 7px;
+}
+
+.display > .answer {
+  font-size: 32px;
+  margin-bottom: 15px;
 }
   
 .buttons {
-  flex: 2 2 auto;
+  flex: auto;
   background-color: lightsteelblue;
   display: flex;
   flex-direction: column;
@@ -48,7 +65,7 @@ h1 {
 .row-4,
 .row-5 {
   display: flex;
-  gap: 15px;
+  
 }
 
 .calc-button {
