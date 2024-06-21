@@ -43,6 +43,7 @@ const allBtns = document.querySelectorAll(".calc-button");
 allBtns.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     const btnValue = e.target.value;
+
     if (btnValue === "AC") {
       displayAnswer.textContent = "";
       equation = displayAnswer.textContent;
@@ -66,8 +67,11 @@ allBtns.forEach((btn) => {
       // Make first and second numbers based on the index of operator
       const firstNumber = +eqnArray.slice(0, index).join("");
       const operator = eqnArray[index];
-      const secondNum = +eqnArray.slice(index + 1).join("");
+      const secondNumber = +eqnArray.slice(index + 1).join("");
 
+      const answer = operate(firstNumber, operator, secondNumber);
+
+      displayAnswer.textContent = `=${answer}`;
     }
     else {
       displayAnswer.textContent += btnValue;
