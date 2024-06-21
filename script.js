@@ -79,42 +79,60 @@ allBtns.forEach((btn) => {
               index.push(i);
             }
           }
-            
+          
+          // Only proceed further when the user inputs some operators
           let total = 0;
-
-          for (let i = 0; i < index.length; i++) {
-            // First sign
-            if (i === 0) {
-              firstNumber = +eqnArray.slice(0, index[i]).join("");
-              operator = eqnArray[index[i]];
-              secondNumber = +eqnArray.slice(index[i] + 1, index[i + 1]).join("");
-              console.log(firstNumber);
-              console.log(operator);
-              console.log(secondNumber);
-            }
-            // Last sign
-            else if( i === (index.length - 1)) {
-              firstNumber = total;
-              operator = eqnArray[index[i]];
-              secondNumber = +eqnArray.slice(index[i] + 1).join("");
-              console.log(firstNumber);
-              console.log(operator);
-              console.log(secondNumber);
-            }
-            // All intermediate signs
-            else {
-              firstNumber = total;
-              operator = eqnArray[index[i]];
-              secondNumber = +eqnArray.slice(index[i] + 1, index[i + 1]).join("");
-              console.log(firstNumber);
-              console.log(operator);
-              console.log(secondNumber);
-            }
-
-            total = operate(firstNumber, operator, secondNumber);
+          if (index.length === 0) {
+            displayAnswer.textContent = `=${equation}`;
           }
+          else {
+            let firstNumArray, secondNumArray;
+            for (let i = 0; i < index.length; i++) {
+              // First operation
+              if (i === 0) {
+                firstNumArray = eqnArray.slice(0, index[i]);
+                secondNumArray = eqnArray.slice(index[i] + 1, index[i + 1]);
 
-          displayAnswer.textContent = `=${total}`;
+                firstNumber = +firstNumArray.join("");
+                operator = eqnArray[index[i]];
+                secondNumber = +secondNumArray.join("");
+              }
+              // Last operation
+              else if( i === (index.length - 1)) {
+                secondNumArray = eqnArray.slice(index[i] + 1);
+
+                firstNumber = total;
+                operator = eqnArray[index[i]];
+                secondNumber = +secondNumArray.join("");
+              }
+              // All intermediate operations
+              else {
+                secondNumArray = eqnArray.slice(index[i] + 1, index[i + 1])
+
+                firstNumber = total;
+                operator = eqnArray[index[i]];
+                secondNumber = +secondNumArray.join("");
+              }
+
+              /* Don't evaluate the expression further if user didn't enter any
+                 number before or after an operator */
+              if (firstNumArray.length === 0 || secondNumArray.length === 0) {
+                total = null;
+                break;
+              }
+              else {
+                total = operate(firstNumber, operator, secondNumber);
+              }
+            }
+
+            // Throw an error if user caused any problems
+            if (total === null) {
+              displayAnswer.textContent = "Error";
+            }
+            else {
+              displayAnswer.textContent = `=${total}`;
+            }
+          }
       }
     }
     else {
