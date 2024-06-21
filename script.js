@@ -54,6 +54,7 @@ allBtns.forEach((btn) => {
       }
     }
 
+    // Handle different key presses
     if (btnValue === "AC") {
       displayAnswer.textContent = "";
       equation = displayAnswer.textContent;
@@ -64,24 +65,31 @@ allBtns.forEach((btn) => {
       equation = displayAnswer.textContent;
     }
     else if (btnValue === "=") {
-      // Find the index where any operator is present
-      const eqnArray = Array.from(equation);
-      let index;
-      for (let i = 0; i < eqnArray.length; i++) {
-        if (eqnArray[i] == "+" || eqnArray[i] == "-" || eqnArray[i] == "*" || eqnArray[i] == "/") {
-          index = i;
+      switch(displayAnswer.textContent) {
+        case "":
+        case null:
           break;
-        }
+
+        default:
+          // Find the index where any operator is present
+          const eqnArray = Array.from(equation);
+          let index;
+          for (let i = 0; i < eqnArray.length; i++) {
+            if (eqnArray[i] == "+" || eqnArray[i] == "-" || eqnArray[i] == "*" || eqnArray[i] == "/") {
+              index = i;
+              break;
+            }
+          }
+
+          // Make first and second numbers based on the index of operator
+          const firstNumber = +eqnArray.slice(0, index).join("");
+          const operator = eqnArray[index];
+          const secondNumber = +eqnArray.slice(index + 1).join("");
+
+          const answer = operate(firstNumber, operator, secondNumber);
+
+          displayAnswer.textContent = `=${answer}`;
       }
-
-      // Make first and second numbers based on the index of operator
-      const firstNumber = +eqnArray.slice(0, index).join("");
-      const operator = eqnArray[index];
-      const secondNumber = +eqnArray.slice(index + 1).join("");
-
-      const answer = operate(firstNumber, operator, secondNumber);
-
-      displayAnswer.textContent = `=${answer}`;
     }
     else {
       displayAnswer.textContent += btnValue;
