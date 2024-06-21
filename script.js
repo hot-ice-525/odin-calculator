@@ -71,24 +71,50 @@ allBtns.forEach((btn) => {
           break;
 
         default:
-          // Find the index where any operator is present
+          // Find all the indices where any operator is present
           const eqnArray = Array.from(equation);
-          let index;
+          let index = [];
           for (let i = 0; i < eqnArray.length; i++) {
             if (eqnArray[i] == "+" || eqnArray[i] == "-" || eqnArray[i] == "*" || eqnArray[i] == "/") {
-              index = i;
-              break;
+              index.push(i);
             }
           }
+            
+          let total = 0;
 
-          // Make first and second numbers based on the index of operator
-          const firstNumber = +eqnArray.slice(0, index).join("");
-          const operator = eqnArray[index];
-          const secondNumber = +eqnArray.slice(index + 1).join("");
+          for (let i = 0; i < index.length; i++) {
+            // First sign
+            if (i === 0) {
+              firstNumber = +eqnArray.slice(0, index[i]).join("");
+              operator = eqnArray[index[i]];
+              secondNumber = +eqnArray.slice(index[i] + 1, index[i + 1]).join("");
+              console.log(firstNumber);
+              console.log(operator);
+              console.log(secondNumber);
+            }
+            // Last sign
+            else if( i === (index.length - 1)) {
+              firstNumber = total;
+              operator = eqnArray[index[i]];
+              secondNumber = +eqnArray.slice(index[i] + 1).join("");
+              console.log(firstNumber);
+              console.log(operator);
+              console.log(secondNumber);
+            }
+            // All intermediate signs
+            else {
+              firstNumber = total;
+              operator = eqnArray[index[i]];
+              secondNumber = +eqnArray.slice(index[i] + 1, index[i + 1]).join("");
+              console.log(firstNumber);
+              console.log(operator);
+              console.log(secondNumber);
+            }
 
-          const answer = operate(firstNumber, operator, secondNumber);
+            total = operate(firstNumber, operator, secondNumber);
+          }
 
-          displayAnswer.textContent = `=${answer}`;
+          displayAnswer.textContent = `=${total}`;
       }
     }
     else {
