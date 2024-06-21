@@ -53,7 +53,21 @@ allBtns.forEach((btn) => {
       equation = displayAnswer.textContent;
     }
     else if (btnValue === "=") {
-      console.log(equation);
+      // Find the index where any operator is present
+      const eqnArray = Array.from(equation);
+      let index;
+      for (let i = 0; i < eqnArray.length; i++) {
+        if (eqnArray[i] == "+" || eqnArray[i] == "-" || eqnArray[i] == "*" || eqnArray[i] == "/") {
+          index = i;
+          break;
+        }
+      }
+
+      // Make first and second numbers based on the index of operator
+      const firstNumber = +eqnArray.slice(0, index).join("");
+      const operator = eqnArray[index];
+      const secondNum = +eqnArray.slice(index + 1).join("");
+
     }
     else {
       displayAnswer.textContent += btnValue;
