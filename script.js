@@ -47,6 +47,11 @@ allBtns.forEach((btn) => {
       displayAnswer.textContent = "";
       equation = displayAnswer.textContent;
     }
+    else if (btnValue === "C") {
+      const length = displayAnswer.textContent.length;
+      displayAnswer.textContent = displayAnswer.textContent.slice(0, length - 1);
+      equation = displayAnswer.textContent;
+    }
     else if (btnValue === "=") {
       console.log(equation);
     }
