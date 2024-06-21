@@ -44,6 +44,16 @@ allBtns.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     const btnValue = e.target.value;
 
+    // Clear the display if user presses a numeric key after displaying the answer of a previous calculation
+    if (displayAnswer.textContent.includes("=")) {
+      if (btnValue === "+" || btnValue === "-" || btnValue === "*" || btnValue === "/") {
+        displayAnswer.textContent = displayAnswer.textContent.slice(1);
+      }
+      else {
+        displayAnswer.textContent = "";
+      }
+    }
+
     if (btnValue === "AC") {
       displayAnswer.textContent = "";
       equation = displayAnswer.textContent;
