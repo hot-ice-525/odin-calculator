@@ -37,11 +37,20 @@ function operate(firstNum, operator, secondNum) {
 }
 
 const displayAnswer = document.querySelector(".display > .answer");
+let equation = null;
 
 const btn = document.querySelector(".buttons");
 btn.addEventListener("click", (e) => {
   const btnValue = e.target.value;
   if (btnValue === "AC") {
-    displayAnswer.innerHTML = "";
+    displayAnswer.textContent = "";
+    equation = displayAnswer.textContent;
+  }
+  else if (btnValue === "=") {
+    console.log(equation);
+  }
+  else {
+    displayAnswer.textContent += btnValue;
+    equation = displayAnswer.textContent;
   }
 })
