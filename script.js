@@ -120,6 +120,11 @@ allBtns.forEach((btn) => {
                 total = null;
                 break;
               }
+              // Throw an error if 0 is in denominator
+              else if (secondNumber === 0 && operator === "/") {
+                total = null;
+                break;
+              }
               else {
                 total = operate(firstNumber, operator, secondNumber);
               }
@@ -130,7 +135,14 @@ allBtns.forEach((btn) => {
               displayAnswer.textContent = "Error";
             }
             else {
-              displayAnswer.textContent = `=${total}`;
+              /* Round off the result to 3 decimal places if it is a decimal
+                 with more than 3 decimal places */
+              if (Number.isInteger(total * 1000)) {
+                displayAnswer.textContent = `=${total}`;
+              }
+              else {
+                displayAnswer.textContent = `=${total.toFixed(3)}`;
+              }
             }
           }
       }
