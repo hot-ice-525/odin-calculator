@@ -144,10 +144,20 @@ allBtns.forEach((btn) => {
               displayAnswer.textContent = "Error";
             }
             else {
+              // To avoid the problem of floating point precision
+              let formatTotal = total.toFixed(3);
+              let numIntoThousand = formatTotal * 1000;
               /* Round off the result to 3 decimal places if it is a decimal
-                 with more than 3 decimal places */
-              if (Number.isInteger(total * 1000)) {
-                displayAnswer.textContent = `=${total}`;
+                 with more than 3 decimal places */          
+              // We don't need trailing zeros after decimal point
+              if (numIntoThousand % 1000 === 0) {
+                displayAnswer.textContent = `=${Math.floor(total)}`;
+              }
+              else if (numIntoThousand % 100 === 0) {
+                displayAnswer.textContent = `=${total.toFixed(1)}`;
+              }
+              else if (numIntoThousand % 10 === 0) {
+                displayAnswer.textContent = `=${total.toFixed(2)}`;
               }
               else {
                 displayAnswer.textContent = `=${total.toFixed(3)}`;
