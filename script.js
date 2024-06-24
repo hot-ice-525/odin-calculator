@@ -114,6 +114,10 @@ allBtns.forEach((btn) => {
                 secondNumber = +secondNumArray.join("");
               }
 
+              // Calculating number of "."
+              let firstNumDecimals = firstNumArray.filter((char) => char === ".").length;
+              let secondNumDecimals = secondNumArray.filter((char) => char === ".").length;
+
               /* Don't evaluate the expression further if user didn't enter any
                  number before or after an operator */
               if (firstNumArray.length === 0 || secondNumArray.length === 0) {
@@ -122,6 +126,11 @@ allBtns.forEach((btn) => {
               }
               // Throw an error if 0 is in denominator
               else if (secondNumber === 0 && operator === "/") {
+                total = null;
+                break;
+              }
+              // Throw an error if any of numbers has more than one . in them
+              else if (firstNumDecimals > 1 || secondNumDecimals > 1) {
                 total = null;
                 break;
               }
