@@ -151,7 +151,7 @@ allBtns.forEach((btn) => {
                  with more than 3 decimal places */          
               // We don't need trailing zeros after decimal point
               if (numIntoThousand % 1000 === 0) {
-                displayAnswer.textContent = `=${Math.floor(total)}`;
+                displayAnswer.textContent = `=${total.toFixed()}`;
               }
               else if (numIntoThousand % 100 === 0) {
                 displayAnswer.textContent = `=${total.toFixed(1)}`;
