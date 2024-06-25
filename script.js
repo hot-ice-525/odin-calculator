@@ -41,7 +41,7 @@ function operate(firstNum, operator, secondNum) {
 }
 
 const displayAnswer = document.querySelector(".display > .answer");
-let equation = null;
+let equation = "";
 
 const allBtns = document.querySelectorAll(".calc-button");
 allBtns.forEach((btn) => {
@@ -66,11 +66,17 @@ allBtns.forEach((btn) => {
       displayAnswer.textContent = "";
       equation = displayAnswer.textContent;
     }
+
     else if (btnValue === "C") {
       const length = displayAnswer.textContent.length;
-      displayAnswer.textContent = displayAnswer.textContent.slice(0, length - 1);
-      equation = displayAnswer.textContent;
+      let clearEqn = displayAnswer.textContent.slice(0, length - 1);
+
+      if (clearEqn.includes(previousEqn)) {
+        displayAnswer.textContent = clearEqn;
+        equation = displayAnswer.textContent;
+      }
     }
+
     else if (btnValue === "+" ||
           btnValue === "-" ||
           btnValue === "*" ||
@@ -83,6 +89,7 @@ allBtns.forEach((btn) => {
       equation = displayAnswer.textContent;
       previousEqn = equation;
     }
+
     else if (btnValue === "=") {
       switch(displayAnswer.textContent) {
         case "":
@@ -91,7 +98,8 @@ allBtns.forEach((btn) => {
 
         default:
           numbersArray.push(+equation.replace(previousEqn, ""));
-          
+          console.log(numbersArray);
+          console.log(operatorsArray);
           // Only proceed further when the user inputs some operators
       //     let total = 0;
       //     if (index.length === 0) {
@@ -110,7 +118,7 @@ allBtns.forEach((btn) => {
       //           secondNumber = +secondNumArray.join("");
       //         }
       //         // Last operation
-      //         else if( i === (index.length - 1)) {
+      //         else if (i === (index.length - 1)) {
       //           sdisplayAnswer.textContent += btnValue;
       // equation = displayAnswer.textContent;econdNumArray = eqnArray.slice(index[i] + 1);
 
@@ -179,6 +187,7 @@ allBtns.forEach((btn) => {
       //     }
       }
     }
+    
     else {
       displayAnswer.textContent += btnValue;
       equation = displayAnswer.textContent;
