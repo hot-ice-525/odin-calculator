@@ -18,6 +18,8 @@ let firstNumber,
     operator,
     secondNumber;
 
+let countOfDecimals = 0;
+
 let numbersArray = [];
 let operatorsArray = [];
 let previousEqn = "";
@@ -65,6 +67,7 @@ allBtns.forEach((btn) => {
 
     // Handle different key presses
     if (btnValue === "AC") {
+      countOfDecimals = 0;
       numbersArray = [];
       operatorsArray = [];
       previousEqn = "";
@@ -74,6 +77,9 @@ allBtns.forEach((btn) => {
 
     else if (btnValue === "C") {
       const length = displayAnswer.textContent.length;
+      if (displayAnswer.textContent[length - 1] === ".") {
+        countOfDecimals = 0;
+      }
       let clearEqn = displayAnswer.textContent.slice(0, length - 1);
 
       if (clearEqn.includes(previousEqn)) {
@@ -87,6 +93,7 @@ allBtns.forEach((btn) => {
           btnValue === "*" ||
           btnValue === "/"
     ) {
+      countOfDecimals = 0;
       let length = equation.length;
       let lastDigit = equation[length - 1];
       if (lastDigit === "+" ||
@@ -111,6 +118,7 @@ allBtns.forEach((btn) => {
     }
 
     else if (btnValue === "=") {
+      countOfDecimals = 0;
       switch(displayAnswer.textContent) {
         case "":
         case null:
@@ -196,8 +204,15 @@ allBtns.forEach((btn) => {
     }
     
     else {
-      displayAnswer.textContent += btnValue;
-      equation = displayAnswer.textContent;
+      if (btnValue === ".") {
+        countOfDecimals++;
+      }
+
+      // Don't allow the user to enter mulitple decimals
+      if (!(btnValue === "." && countOfDecimals > 1)) {
+        displayAnswer.textContent += btnValue;
+        equation = displayAnswer.textContent;
+      }
     }
   });
 });
