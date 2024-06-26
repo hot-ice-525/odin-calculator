@@ -87,13 +87,25 @@ allBtns.forEach((btn) => {
           btnValue === "*" ||
           btnValue === "/"
     ) {
-      let number = equation.replace(previousEqn, "");
-      if (number) {
-        numbersArray.push(+number);
+      let length = equation.length;
+      let lastDigit = equation[length - 1];
+      if (lastDigit === "+" ||
+          lastDigit === "-" ||
+          lastDigit === "*" ||
+          lastDigit === "/"
+      ) {
+        displayAnswer.textContent = displayAnswer.textContent.slice(0, length - 1) + btnValue;
+        operatorsArray.splice((operatorsArray.length - 1), 1, btnValue);
+      }
+      else {
+        let number = equation.replace(previousEqn, "");
+        if (number) {
+          numbersArray.push(+number);
+        }
+        operatorsArray.push(btnValue);
+        displayAnswer.textContent += btnValue;
       }
       
-      operatorsArray.push(btnValue);
-      displayAnswer.textContent += btnValue;
       equation = displayAnswer.textContent;
       previousEqn = equation;
     }
@@ -180,92 +192,6 @@ allBtns.forEach((btn) => {
             numbersArray  = [];
             operatorsArray = [];
           }
-
-          // Only proceed further when the user inputs some operators
-      //     let total = 0;
-      //     if (index.length === 0) {
-      //       displayAnswer.textContent = `=${equation}`;
-      //     }
-      //     else {
-      //       let firstNumArray, secondNumArray;
-      //       for (let i = 0; i < index.length; i++) {
-      //         // First operation
-      //         if (i === 0) {
-      //           firstNumArray = eqnArray.slice(0, index[i]);
-      //           secondNumArray = eqnArray.slice(index[i] + 1, index[i + 1]);
-
-      //           firstNumber = +firstNumArray.join("");
-      //           operator = eqnArray[index[i]];
-      //           secondNumber = +secondNumArray.join("");
-      //         }
-      //         // Last operation
-      //         else if (i === (index.length - 1)) {
-      //           sdisplayAnswer.textContent += btnValue;
-      // equation = displayAnswer.textContent;econdNumArray = eqnArray.slice(index[i] + 1);
-
-      //           firstNumber = total;
-      //           operator = eqnArray[index[i]];
-      //           secondNumber = +secondNumArray.join("");
-      //         }
-      //         // All intermediate operations
-      //         else {
-      //           secondNumArray = eqnArray.slice(index[i] + 1, index[i + 1])
-
-      //           firstNumber = total;
-      //           operator = eqnArray[index[i]];
-      //           secondNumber = +secondNumArray.join("");
-      //         }
-
-      //         // Calculating number of "."
-      //         let firstNumDecimals = firstNumArray.filter((char) => char === ".").length;
-      //         let secondNumDecimals = secondNumArray.filter((char) => char === ".").length;
-
-      //         /* Don't evaluate the expression further if user didn't enter any
-      //            number before or after an operator */
-      //         if (firstNumArray.length === 0 || secondNumArray.length === 0) {
-      //           total = null;
-      //           break;
-      //         }
-      //         // Throw an error if 0 is in denominator
-      //         else if (secondNumber === 0 && operator === "/") {
-      //           total = null;
-      //           break;
-      //         }
-      //         // Throw an error if any of numbers has more than one . in them
-      //         else if (firstNumDecimals > 1 || secondNumDecimals > 1) {
-      //           total = null;
-      //           break;
-      //         }
-      //         else {
-      //           total = operate(firstNumber, operator, secondNumber);
-      //         }
-      //       }
-
-      //       // Throw an error if user caused any problems
-      //       if (total === null) {
-      //         displayAnswer.textContent = "Error";
-      //       }
-      //       else {
-      //         // To avoid the problem of floating point precision
-      //         let formatTotal = total.toFixed(3);
-      //         let numIntoThousand = formatTotal * 1000;
-      //         /* Round off the result to 3 decimal places if it is a decimal
-      //            with more than 3 decimal places */          
-      //         // We don't need trailing zeros after decimal point
-      //         if (numIntoThousand % 1000 === 0) {
-      //           displayAnswer.textContent = `=${total.toFixed()}`;
-      //         }
-      //         else if (numIntoThousand % 100 === 0) {
-      //           displayAnswer.textContent = `=${total.toFixed(1)}`;
-      //         }
-      //         else if (numIntoThousand % 10 === 0) {
-      //           displayAnswer.textContent = `=${total.toFixed(2)}`;
-      //         }
-      //         else {
-      //           displayAnswer.textContent = `=${total.toFixed(3)}`;
-      //         }
-      //       }
-      //     }
       }
     }
     
