@@ -56,6 +56,11 @@ allBtns.forEach((btn) => {
       else {
         displayAnswer.textContent = "";
       }
+
+      numbersArray = [];
+      operatorsArray = [];
+      equation = displayAnswer.textContent;
+      previousEqn = "";
     }
 
     // Handle different key presses
@@ -86,7 +91,7 @@ allBtns.forEach((btn) => {
       if (number) {
         numbersArray.push(+number);
       }
-
+      
       operatorsArray.push(btnValue);
       displayAnswer.textContent += btnValue;
       equation = displayAnswer.textContent;
