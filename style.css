@@ -4,6 +4,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  border-style: none;
+  font-size: 20px;
 }
 
 body {
@@ -19,6 +21,7 @@ h1 {
   text-align: center;
   margin-top: 30px;
   margin-bottom: 30px;
+  font-size: 48px;
 }
 
 .container {
@@ -71,4 +74,24 @@ h1 {
   height: 72px;
   width: 104px;
   flex: auto;
+  transition: all 0.2s ease;
+}
+
+.calc-button:hover {
+  opacity: 0.8;
+}
+
+button[value="C"],
+button[value="+"],
+button[value="-"],
+button[value="*"],
+button[value="/"] {
+  background-color: lightseagreen;
+  
+}
+
+button[value="AC"],
+button[value="="] {
+  background-color: lightpink;
+
 }
