@@ -8,6 +8,12 @@
   font-size: 20px;
 }
 
+@font-face {
+  font-family: calculator-font;
+  font-size: 48px;
+  src: url(./digital-fonts/digital-7.ttf);
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -25,12 +31,16 @@ h1 {
 }
 
 .container {
-  background-color: antiquewhite;
+  background-color: grey;
   margin-left: auto;
   margin-right: auto;
   margin-top: 30px;
+  border: 4px solid black;
+  border-radius: 12px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
   
 .display {
@@ -38,25 +48,26 @@ h1 {
   height: 100px;
   display: flex;
   text-align: left;
+  background-color: silver;
+  border: 4px solid black;
+  border-radius: 12px;
+  font-family: calculator-font;
   flex-direction: column;
   justify-content: flex-end;
 }
 
-.display > .previous,
 .display > .answer {
   margin-left: auto;
   margin-right: 10px;
   margin-bottom: 7px;
-}
-
-.display > .answer {
-  font-size: 32px;
-  margin-bottom: 15px;
+  font-size: 64px;
+  margin-bottom: 25px;
 }
   
 .buttons {
   flex: auto;
-  background-color: lightsteelblue;
+  background-color: grey;
+  padding: 5px;
   display: flex;
   flex-direction: column;
 }
@@ -75,6 +86,11 @@ h1 {
   width: 104px;
   flex: auto;
   transition: all 0.2s ease;
+  margin: 5px;
+  border: 2px solid black;
+  border-radius: 6px;
+  background-color: silver;
+  font-size: 28px;
 }
 
 .calc-button:hover {
@@ -92,6 +108,6 @@ button[value="/"] {
 
 button[value="AC"],
 button[value="="] {
-  background-color: lightpink;
+  background-color: darkkhaki;
 
 }
