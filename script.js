@@ -82,8 +82,11 @@ allBtns.forEach((btn) => {
           btnValue === "*" ||
           btnValue === "/"
     ) {
-      let number = +equation.replace(previousEqn, "");
-      numbersArray.push(number);
+      let number = equation.replace(previousEqn, "");
+      if (number) {
+        numbersArray.push(+number);
+      }
+
       operatorsArray.push(btnValue);
       displayAnswer.textContent += btnValue;
       equation = displayAnswer.textContent;
@@ -97,9 +100,82 @@ allBtns.forEach((btn) => {
           break;
 
         default:
-          numbersArray.push(+equation.replace(previousEqn, ""));
-          console.log(numbersArray);
-          console.log(operatorsArray);
+          let lastNumber = equation.replace(previousEqn, "");
+          if (lastNumber) {
+            numbersArray.push(+lastNumber);
+          }
+
+          let error = 0;
+          if (operatorsArray.length === (numbersArray.length - 1)) {
+            // Follow BODMAS
+            // Solve multiplication and division
+            for (let i = 0; i < operatorsArray.length; i++) {
+              if (operatorsArray[i] === "*" || operatorsArray[i] === "/") {
+                firstNumber = numbersArray[i];
+                operator = operatorsArray[i];
+                secondNumber = numbersArray[i + 1];
+                // Throw an error if 0 is in denominator upon divison
+                if (operator === "/" && secondNumber === 0) {
+                  error = 1;
+                  break;
+                }
+                let answer = operate(firstNumber, operator, secondNumber);
+                // Replace first and second number by their answer
+                numbersArray.splice(i, 2, answer);
+                // Remove the operator from its array
+                operatorsArray.splice(i, 1);
+                i--;
+              }
+            }
+
+            if (error === 0) {
+              // Solve addition and substraction
+              for (let i = 0; i < operatorsArray.length; i++) {
+                if (operatorsArray[i] === "+" || operatorsArray[i] === "-") {
+                  firstNumber = numbersArray[i];
+                  operator = operatorsArray[i];
+                  secondNumber = numbersArray[i + 1];
+                  let answer = operate(firstNumber, operator, secondNumber);
+                  // Replace first and second number by their answer
+                  numbersArray.splice(i, 2, answer);
+                  // Remove the operator from its array
+                  operatorsArray.splice(i, 1);
+                  i--;
+                }
+              }
+            }
+          }
+          else {
+            error = 1;
+          }
+
+          // Display the answer
+          if (error === 0) {
+            let total = numbersArray[0];
+            let formatTotal = total.toFixed(3);
+            let numIntoThousand = formatTotal * 1000;
+            /* Round off the result to 3 decimal places if it is a decimal
+               with more than 3 decimal places */          
+            // We don't need trailing zeros after decimal point
+            if (numIntoThousand % 1000 === 0) {
+              displayAnswer.textContent = `=${total.toFixed()}`;
+            }
+            else if (numIntoThousand % 100 === 0) {
+              displayAnswer.textContent = `=${total.toFixed(1)}`;
+            }
+            else if (numIntoThousand % 10 === 0) {
+              displayAnswer.textContent = `=${total.toFixed(2)}`;
+            }
+            else {
+              displayAnswer.textContent = `=${total.toFixed(3)}`;
+            }
+          }
+          else {
+            displayAnswer.textContent = "Error";
+            numbersArray  = [];
+            operatorsArray = [];
+          }
+
           // Only proceed further when the user inputs some operators
       //     let total = 0;
       //     if (index.length === 0) {
